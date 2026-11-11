@@ -2,4 +2,4 @@ def calculater_charity (income):
     if income > 50000:
         return income * 0.025
     return 0
-print(f"Charity donation: pkr{calculater_charity(60000):.2f}")
+print(f"Charity donation: Dol{calculater_charity(60000):.2f}")
