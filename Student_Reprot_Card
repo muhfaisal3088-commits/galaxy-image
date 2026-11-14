@@ -1,0 +1,73 @@
+def add_student(records):
+    name = input("Enter a name: ")
+    roll_number = input("Roll Number: ")
+
+    if roll_number in records:
+        print("Roll Number Already exists! Try Again.\n")
+        return
+
+    marks = []
+    subjects = ["English", "Urdu", "Math"]
+
+    for subject in subjects:
+        while True:
+            try:
+                m = int(input(f"{subject} marks (0 - 100): "))
+
+                if 0 <= m <= 100:
+                    marks.append(m)
+                    break
+                else:
+                    print("Marks must be between 0 and 100. Try Again.")
+            except ValueError:
+                print("Invalid input! Please enter a valid number.")
+
+    records[roll_number] = {"name": name, "marks": marks}
+    print("Student Added successfully!\n")
+
+
+def view_gradebook(records):
+    if not records:
+        print("No Student records\n")
+        return
+
+    print("\n----- Grade Book -----")
+    for roll_number, data in records.items():
+        avg = sum(data["marks"]) / len(data["marks"])
+        grade = (
+            "A" if avg >= 80 else
+            "B" if avg >= 70 else
+            "C" if avg >= 60 else
+            "F"
+        )
+        print(f"Roll NO : {roll_number}")
+        print(f"Name    : {data['name']}")
+        print(f"Average : {avg:.1f}")
+        print(f"Grade   : {grade}")
+        print("-----------------------------------")
+    print()
+
+
+def main():
+    records = {}
+    print("Pakistan Student Report Book\n")
+
+    while True:
+        print("1. Add Student")
+        print("2. View Grade Book")
+        print("3. Exit")
+        ch = input("Choose an option: ")
+
+        if ch == "1":
+            add_student(records)
+        elif ch == "2":
+            view_gradebook(records)
+        elif ch == "3":
+            print("Bye!")
+            break
+        else:
+            print("Invalid option! Please try again.\n")
+
+
+if __name__ == "__main__":
+    main()
